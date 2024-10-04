@@ -399,11 +399,10 @@ end
 
       <section>
         <h2>Concurrency</h2>
-<pre class="fragment"><code class="language-crystal"># macro expansion of method body with ivars @bar and @baz
-channel = Channel(Int32).new
+<pre class="fragment"><code class="language-crystal">channel = Channel(Int32).new
 
-3.times do |i|
-  spawn do
+3.times do |i|   # i = 0, 1, 2
+  spawn do       # concurrently do...
     3.times do |j|
       sleep rand(100).milliseconds # add non-determinism for fun
       channel.send 10 * (i + 1) + j
